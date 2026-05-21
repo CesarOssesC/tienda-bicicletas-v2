@@ -1,0 +1,44 @@
+<div class="container">
+    <h2 class="text-center my-5">Editar Bicicleta id: {{bicicleta.id}}</h2>
+    <div class="border rounded shadow py-5 d-flex justify-content-center mb-5">
+        <div class="col-6">
+            <form action="/bicicletas/{{bicicleta.id}}?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" name="marca" id="marca" class="form-control" value="{{bicicleta.marca}}">
+                </div>
+                <div class="mb-3">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" name="modelo" id="modelo" class="form-control" value="{{bicicleta.modelo}}">
+                </div>
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-select">
+                        {{#each tipos}}
+                        <option value="{{value}}" {{#if selected}}selected{{/if}}>{{value}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" name="precio" id="precio" class="form-control" value="{{bicicleta.precio}}">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" name="disponible" id="disponible" class="form-check-input" {{#if
+                        bicicleta.disponible}}checked{{/if}}>
+                    <label for="disponible" class="form-check-label">Disponible?</label>
+                </div>
+                <div class="mb-5">
+                    <label for="year" class="form-label">Año</label>
+                    <input type="number" name="year" id="year" class="form-control" value="{{bicicleta.year}}">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary mb-3 w-100">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="/" class="btn btn-dark">Volver al listado</a>
+    </div>
+</div>

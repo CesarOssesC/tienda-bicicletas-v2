@@ -1,0 +1,42 @@
+<div class="container">
+    <h2 class="text-center my-5">Crear Bicicleta</h2>
+    <div class="border rounded shadow py-5 d-flex justify-content-center">
+        <div class="col-6">
+            <form action="/bicicletas" method="POST">
+                <div class="mb-3">
+                    <label for="marca" class="form-label">Marca</label>
+                    <input type="text" name="marca" id="marca" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="modelo" class="form-label">Modelo</label>
+                    <input type="text" name="modelo" id="modelo" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo</label>
+                    <select name="tipo" id="tipo" class="form-select">
+                        <option value="mtb">MTB</option>
+                        <option value="ruta">Ruta</option>
+                        <option value="Trail">Trail</option>
+                        <option value="enduro">Enduro</option>
+                        <option value="bmx">BMX</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio</label>
+                    <input type="number" name="precio" id="precio" class="form-control">
+                </div>
+                <div class="mb-3 form-check">
+                    <input type="checkbox" name="disponible" id="disponible" class="form-check-input">
+                    <label for="disponible" class="form-check-label">Disponible?</label>
+                </div>
+                <div class="mb-5">
+                    <label for="year" class="form-label">Año</label>
+                    <input type="number" name="year" id="year" class="form-control">
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary mb-3 w-100">Crear</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
