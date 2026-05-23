@@ -5,7 +5,9 @@ const methodOverride = require('method-override')
 const PORT = process.env.PORT || 3000
 
 const bicicletasRouter = require('./src/routes/bicicletas')
-const sequelize = require('./src/config/db')
+const comprasRouter = require('./src/routes/compras')
+// const sequelize = require('./src/config/db')
+const { sequelize } = require('./src/models/associations')
 
 const app = express()
 
@@ -24,11 +26,12 @@ app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'src', 'views'))
 
 app.use('/bicicletas', bicicletasRouter)
+app.use('/compras', comprasRouter)
 
 app.get('/', (req, res) => res.redirect('/bicicletas'))
 
 
-sequelize.sync({ force: true })
+sequelize.sync({ alter: true })
     .then(() => {
         console.log('Base de datos ha sido sincronizada.')
         app.listen(PORT, () => {
