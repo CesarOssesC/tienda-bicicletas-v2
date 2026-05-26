@@ -1,0 +1,40 @@
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2>Detalle compra #{{compra.id}}</h2>
+        <a href="/compras" class="btn btn-primary">Volver</a>
+    </div>
+    <div class="mb-2">
+        <small class="text-body-secondary">Fecha: {{fecha}}</small>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Marca</th>
+                    <th>Modelo</th>
+                    <th>Tipo</th>
+                    <th>Año</th>
+                    <th>precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each compra.bicicleta as |bicicleta|}}
+                <tr>
+                    <td>{{bicicleta.marca}}</td>
+                    <td>{{bicicleta.modelo}}</td>
+                    <td>{{bicicleta.tipo}}</td>
+                    <td>{{bicicleta.year}}</td>
+                    <td>{{bicicleta.precio}}</td>
+                    <td>{{bicicleta.compra_bicicleta.cantidad}}</td>
+                    <td>{{bicicleta.compra_bicicleta.subtotal}}</td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-end mt-3 mb-5">
+            <h3 class="">Total: ${{compra.total}}</h3>
+        </div>
+    </div>
+</div>

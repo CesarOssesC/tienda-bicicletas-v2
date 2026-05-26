@@ -35,6 +35,7 @@ exports.create = async (req, res, next) => {
         }
 
         const compra = await Compra.create({ total: 0 })
+        let total = 0
 
         const ids = Array.isArray(seleccionadas) ? seleccionadas : [seleccionadas]
 
@@ -65,5 +66,29 @@ exports.create = async (req, res, next) => {
 }
 
 exports.show = async (req, res, next) => {
+    try {
+        const { id } = req.params
 
+        const compra = await Compra.findByPk(id, {
+            include: [
+                {
+                    model: Bicicleta,
+                    through: { attributes: ['cantidad', 'subtotal']}
+                }
+            ]
+        })
+
+        if(!compra) {
+            return res.status(404).send('Compra no encontrada')
+        }
+
+        const datosCompra = compra.get({ plain: true })
+
+        const fechaCompra = datosCompra.createdAt
+        const fechaFormateada = new Date(fechaCompra).toLocaleString('es-CL')
+
+        res.render('compras/show', { compra: datosCompra, fecha: fechaFormateada })
+    } catch (error) {
+        next(error)
+    }
 }

@@ -92,7 +92,7 @@ exports.update = async (req, res, next) => {
     
         const bici = await Bicicleta.findByPk(id)
 
-        if (!bicicleta) return res.status(404).send(`Bicicleta con el id: ${id} no encontrada`)
+        if (!bici) return res.status(404).send(`Bicicleta con el id: ${id} no encontrada`)
 
         const biciActualizada = await bici.update({ marca, modelo, tipo, precio: parseFloat(precio), disponible, year: parseInt(year) })
         
@@ -110,7 +110,7 @@ exports.delete = async (req, res, next) => {
 
         const bici = await Bicicleta.findByPk(id)
 
-        if (!bicicleta) return res.status(404).send(`Bicicleta con el id: ${id} no encontrada`)
+        if (!bici) return res.status(404).send(`Bicicleta con el id: ${id} no encontrada`)
 
         const biciEliminada = await bici.destroy()
 

@@ -1,0 +1,34 @@
+<div class="container my-5">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2>Compras</h2>
+        <a href="/compras/new" class="btn btn-primary">Generar Compra</a>
+    </div>
+    {{#if compras.length}}
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Total</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each compras as |compra|}}
+                    <tr>
+                        <td>{{compra.id}}</td>
+                        <td>{{compra.total}}</td>
+                        <td>{{compra.createdAt}}</td>
+                        <td>
+                            <a href="/compras/{{compra.id}}" class="btn btn-primary btn-sm">Detalles</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    {{else}}
+        <div class="alert alert-info" role="alert">
+            No hay compras registradas aún.
+        </div>
+    {{/if}}
+</div>
