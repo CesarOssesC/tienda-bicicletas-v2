@@ -1,6 +1,5 @@
 const { raw } = require('express')
-const Bicicleta =require('../models/Bicicleta')
-
+const { Bicicleta, Review } = require('../models/associations')
 
 exports.index = async (req, res, next) => {
     try {
@@ -19,7 +18,9 @@ exports.show = async (req, res, next) => {
     try {
         const { id } = req.params
         const { success } = req.query
-        const bicicleta = await Bicicleta.findByPk(id)
+        const bicicleta = await Bicicleta.findByPk(id, {
+            include: [{ model: Review, order: [['updatedAt', 'DESC']] }]
+        })
         if (!bicicleta) return res.status(404).send(`Bicicleta con el id: ${id} no encontrada`)
 
         const biciDatoPlano = {

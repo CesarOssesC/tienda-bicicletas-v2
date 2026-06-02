@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000
 
 const bicicletasRouter = require('./src/routes/bicicletas')
 const comprasRouter = require('./src/routes/compras')
+const reviewsRouter = require('./src/routes/reviews')
 // const sequelize = require('./src/config/db')
 const { sequelize } = require('./src/models/associations')
 
@@ -27,6 +28,7 @@ app.set('views', path.join(__dirname, 'src', 'views'))
 
 app.use('/bicicletas', bicicletasRouter)
 app.use('/compras', comprasRouter)
+app.use('/reviews', reviewsRouter)
 
 app.get('/', (req, res) => res.redirect('/bicicletas'))
 

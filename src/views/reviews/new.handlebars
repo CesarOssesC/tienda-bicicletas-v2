@@ -1,0 +1,22 @@
+<div class="container">
+    <h2 class="text-center my-5">Nueva Reseña</h2>
+    <div class="border rounded shadow py-5 d-flex justify-content-center">
+        <div class="col-6">
+            <form action="/reviews" method="POST">
+                <input type="hidden" name="bicicletaId" value="{{bicicletaId}}">
+                <div class="mb-3">
+                    <label for="comentario" class="form-label">Comentario</label>
+                    <textarea name="comentario" id="comentario" class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="calificacion" class="form-label">Calificación (Entre 1 y 5)</label>
+                    <input type="number" name="calificacion" id="calificacion" class="form-control" min="1" max="5">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mb-3 w-100">Guardar</button>
+                    <a href="/bicicletas/{{bicicletaId}}" class="btn btn-dark w-100"">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
