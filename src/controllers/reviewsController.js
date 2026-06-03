@@ -35,13 +35,53 @@ exports.create = async (req, res, next) => {
 }
 
 exports.edit = async (req, res, next) => {
+    try {
+        const reviewInstance = await Review.findByPk(req.params.id)
+        if(!reviewInstance) return res.status(404).send('Reseña no encontrada')
 
-}
+        const review = reviewInstance.get({ plain: true })
+
+        res.render('reviews/edit', { review })
+    } catch (error) {
+        next(error)
+    }
+}   
 
 exports.update = async (req, res, next) => {
+    try {
+        const { id } = req.params
+        const { comentario, calificacion, bicicletaId } = req.body
 
+        const review = Review.update(
+            { comentario, calificacion: parseInt(calificacion), bicicletaId: parseInt(bicicletaId) },
+            { where: { id } }
+        );
+
+        console.log('Reseña actualizada exitosamente', review)
+
+        const msg = encodeURIComponent('Reseña actualizada exitosamente!')
+
+        res.redirect(`/bicicletas/${bicicletaId}?success=${msg}`)
+    } catch (error) {
+        next(error)
+    }
 }
 
 exports.delete = async (req, res, next) => {
+    try {
+        const review = await Review.findByPk(req.params.id)
+        if (!review) return res.status(404).send('Reseña no encontrada')
+        
+        const bicicletaId = review.bicicletaId
 
+        await review.destroy()
+
+        console.log('Reseña eliminada exitosamente', review)
+
+        const msg = encodeURIComponent('Reseña eliminada exitosamente!')
+
+        res.redirect(`/bicicletas/${bicicletaId}?success=${msg}`)
+    } catch (error) {
+        next(error)
+    }
 }

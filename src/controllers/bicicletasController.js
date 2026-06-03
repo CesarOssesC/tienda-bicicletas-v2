@@ -19,7 +19,8 @@ exports.show = async (req, res, next) => {
         const { id } = req.params
         const { success } = req.query
         const bicicleta = await Bicicleta.findByPk(id, {
-            include: [{ model: Review, order: [['updatedAt', 'DESC']] }]
+            include: [Review],
+            order: [[Review, 'updatedAt', 'DESC']]
         })
         if (!bicicleta) return res.status(404).send(`Bicicleta con el id: ${id} no encontrada`)
 

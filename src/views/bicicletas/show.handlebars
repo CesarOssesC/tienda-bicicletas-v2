@@ -36,7 +36,14 @@
                 <li class="list-group-item mb-5">
                     <p><strong>Comentario: </strong>{{review.comentario}}</p>
                     <p><strong>Calificacion: </strong>{{review.calificacion}}</p>
-                    <p><strong>Fecha: </strong>{{review.updateAt}}</p>
+                    <p class="mb-5"><strong>Fecha: </strong>{{review.updatedAt}}</p>
+                    <div class="d-flex gap-2">
+                        <a class="btn btn-warning btn-sm" href="/reviews/{{review.id}}/edit">Editar</a>
+                        <form action="/reviews/{{review.id}}?_method=DELETE" method="POST">
+                            <button class="btn btn-danger btn-sm" type="submit"
+                                onclick="return confirm('Seguro deseas eliminar esta reseña?')">Eliminar</button>
+                        </form>
+                    </div>
                 </li>
             {{/each}}
         </ul>

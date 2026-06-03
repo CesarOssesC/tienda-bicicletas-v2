@@ -2,11 +2,13 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const path = require('path')
 const methodOverride = require('method-override')
+const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 3000
 
 const bicicletasRouter = require('./src/routes/bicicletas')
 const comprasRouter = require('./src/routes/compras')
 const reviewsRouter = require('./src/routes/reviews')
+const authRouter = require('./src/routes/auth')
 // const sequelize = require('./src/config/db')
 const { sequelize } = require('./src/models/associations')
 
@@ -18,6 +20,7 @@ app.use('/bootstrap/css', express.static(__dirname + '/node_modules/bootstrap/di
 app.use('/bootstrap/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(methodOverride('_method'))
+app.use(cookieParser())
 
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main',
@@ -29,6 +32,7 @@ app.set('views', path.join(__dirname, 'src', 'views'))
 app.use('/bicicletas', bicicletasRouter)
 app.use('/compras', comprasRouter)
 app.use('/reviews', reviewsRouter)
+app.use('/auth', authRouter)
 
 app.get('/', (req, res) => res.redirect('/bicicletas'))
 
