@@ -22,6 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(methodOverride('_method'))
 app.use(cookieParser())
 
+const { currentUser } = require('./src/middlewares/auth')
+app.use(currentUser)
+
+app.use((req, res, next) => {
+    res.locals.usuario = req.auth || null
+    next()
+})
+
 app.engine('handlebars', exphbs.engine({
     defaultLayout: 'main',
     partialsDir: path.join(__dirname, 'src', 'views', 'partials')

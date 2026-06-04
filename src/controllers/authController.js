@@ -42,7 +42,7 @@ exports.registerUser = async (req, res, next) => {
 
         const msg = encodeURIComponent('Te has registrado exitosamente, ahora inicia tu sesión.')
 
-        res.redirect(`auth/login?success=${msg}`)
+        res.redirect(`/auth/login?success=${msg}`)
     } catch (error) {
         next(error)
     }
@@ -102,7 +102,7 @@ exports.logout = async (req, res, next) => {
         res.clearCookie('token')
         const msg = encodeURIComponent(`Sesión Cerrada`)
     
-        res.redirect(`auth/login?success=${msg}`)
+        res.redirect(`/auth/login?success=${msg}`)
         
     } catch (error) {
         next(error)

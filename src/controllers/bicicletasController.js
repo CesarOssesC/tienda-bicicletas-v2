@@ -1,5 +1,6 @@
 const { raw } = require('express')
 const { Bicicleta, Review } = require('../models/associations')
+const { requireAuth, requireRole } = require('../middlewares/auth')
 
 exports.index = async (req, res, next) => {
     try {
@@ -14,7 +15,9 @@ exports.index = async (req, res, next) => {
     }
 }
 
-exports.show = async (req, res, next) => {
+exports.show = [
+    requireAuth,
+    async (req, res, next) => {
     try {
         const { id } = req.params
         const { success } = req.query
@@ -32,15 +35,17 @@ exports.show = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+}]
 
-exports.new = async (req, res, next) => {
+exports.new = [
+    requireRole('admin'),
+    async (req, res, next) => {
     try {
         res.render('bicicletas/new')
     } catch (error) {
         next(error)
     }
-}
+}]
 
 exports.create = async (req, res, next) => {
     try {
