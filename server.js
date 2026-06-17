@@ -3,7 +3,7 @@ const exphbs = require('express-handlebars')
 const path = require('path')
 const methodOverride = require('method-override')
 const cookieParser = require('cookie-parser')
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 8080
 
 const bicicletasRouter = require('./src/routes/bicicletas')
 const comprasRouter = require('./src/routes/compras')
@@ -44,6 +44,10 @@ app.use('/auth', authRouter)
 
 app.get('/', (req, res) => res.redirect('/bicicletas'))
 
+app.use((err, req, res, next) => {
+    console.error(err.stack)
+    res.status(500).send("Algo malió sal...")
+})
 
 sequelize.sync({ alter: true })
     .then(() => {
